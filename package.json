@@ -9,5 +9,8 @@
     "discord.js": "^14.8.0",
     "dotenv": "^16.0.3"
   },
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "start": "node ."
+  }
 }
