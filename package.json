@@ -12,5 +12,8 @@
   "type": "module",
   "scripts": {
     "start": "node ."
+  },
+  "engines": {
+    "node": "18"
   }
 }
