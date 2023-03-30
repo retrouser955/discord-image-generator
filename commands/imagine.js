@@ -41,7 +41,7 @@ export const run = async (client, ctx) => {
     const prompt = ctx.options.getString("prompt")
 
     const attachment = await generatePrompt(
-      aiModel === "prompthero/openjourney" ? `mdjrny-v4 style ${prompt}` : prompt,
+      aiModel === "prompthero/openjourney" ? `mdjrny-v4 style ${prompt} --v 4` : prompt,
       aiModel,
       ctx.options.getString("avoid") ?? "blurry",
     );
