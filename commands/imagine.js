@@ -21,7 +21,10 @@ export const data = new SlashCommandBuilder()
     .setDescription("The AI model you wish to use")
     .addChoices(
       { name: "OpenJourney", value: "prompthero/openjourney" },
-      { name: "Stable Diffusion", value: "stabilityai/stable-diffusion-2-1" }
+      { name: "Stable Diffusion", value: "stabilityai/stable-diffusion-2-1" },
+      { name: "Dreamlike Photoreal", value: "dreamlike-art/dreamlike-photoreal-2.0" },
+      { name: "Never-ending dream", value: "Lykon/NeverEnding-Dream" },
+      { name: "Dream Shaper", value: "Lykon/DreamShaper" }
     )
   )
 
@@ -37,7 +40,7 @@ export const run = async (client, ctx) => {
   });
 
   try {
-    const aiModel = ctx.options.getString("model") ?? "stabilityai/stable-diffusion-2-1"
+    const aiModel = ctx.options.getString("model") ?? "prompthero/openjourney"
     const prompt = ctx.options.getString("prompt")
 
     const attachment = await generatePrompt(
