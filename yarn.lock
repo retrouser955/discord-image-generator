@@ -46,10 +46,10 @@
   resolved "https://registry.npmjs.org/@discordjs/util/-/util-0.2.0.tgz#91b590dae3934ffa5fe34530afc5212c569d6751"
   integrity sha512-/8qNbebFzLWKOOg+UV+RB8itp4SmU5jw0tBUD3ifElW6rYNOj1Ku5JaSW7lLl/WgjjxF01l/1uQPCzkwr110vg==
 
-"@huggingface/inference@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.npmjs.org/@huggingface/inference/-/inference-1.6.0.tgz#9bc6cd51e589560d0622d614375e2fc29226a751"
-  integrity sha512-j8feaIZp3ED4N98eb3szhYcp67pvwOCPZIkA9Ao4RCN5MPX+zUxOWP95ozhdUbQiAdyVNCB0UGoCpQywTgD8Aw==
+"@huggingface/inference@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.npmjs.org/@huggingface/inference/-/inference-1.8.0.tgz#5b1b22c790451e8051adefe9b7f725a7135c38a8"
+  integrity sha512-Dkh7PiyMf6TINRocQsdceiR5LcqJiUHgWjaBMRpCUOCbs+GZA122VH9q+wodoSptj6rIQf7wIwtDsof+/gd0WA==
 
 "@sapphire/async-queue@^1.5.0":
   version "1.5.0"

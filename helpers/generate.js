@@ -15,8 +15,12 @@ inference = new HfInference(HF_ACCESS_TOKEN, {
 export async function generatePrompt(prompt, model, negative_prompt, name) {
   const image = await inference.textToImage({
     inputs: prompt,
-    negative_prompt: negative_prompt ?? "blurry",
-    model: model,
+    parameters: {
+      negative_prompt: negative_prompt ?? "blurry",
+      width: 512,
+      height: 800
+    },
+    model: model
   })
 
   const attachment = new AttachmentBuilder(
