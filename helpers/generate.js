@@ -17,8 +17,6 @@ export async function generatePrompt(prompt, model, negative_prompt, name) {
     inputs: prompt,
     parameters: {
       negative_prompt: negative_prompt ?? "blurry",
-      width: 512,
-      height: 800
     },
     model: model
   })
