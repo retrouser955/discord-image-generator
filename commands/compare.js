@@ -6,6 +6,7 @@ import {
     EmbedBuilder,
 } from "discord.js";
 import { generatePrompt } from "../helpers/generate.js";
+import CHOICES from "../helpers/choices.js";
 
 export const name = "compare";
 export const description =
@@ -34,12 +35,7 @@ export const data = new SlashCommandBuilder()
             .setName("model_1")
             .setDescription("The first model you want to generate")
             .addChoices(
-                { name: "OpenJourney", value: "prompthero/openjourney" },
-                { name: "Stable Diffusion", value: "stabilityai/stable-diffusion-2-1" },
-                { name: "Dreamlike Photoreal", value: "dreamlike-art/dreamlike-photoreal-2.0" },
-                { name: "Never-ending dream", value: "Lykon/NeverEnding-Dream" },
-                { name: "Dream Shaper", value: "Lykon/DreamShaper" },
-                { name: "Protogen", value: "darkstorm2150/Protogen_v2.2_Official_Release" }
+                ...CHOICES
             )
             .setRequired(true)
     )
@@ -48,12 +44,7 @@ export const data = new SlashCommandBuilder()
             .setName("model_2")
             .setDescription("The second model you want to generate")
             .addChoices(
-                { name: "OpenJourney", value: "prompthero/openjourney" },
-                { name: "Stable Diffusion", value: "stabilityai/stable-diffusion-2-1" },
-                { name: "Dreamlike Photoreal", value: "dreamlike-art/dreamlike-photoreal-2.0" },
-                { name: "Never-ending dream", value: "Lykon/NeverEnding-Dream" },
-                { name: "Dream Shaper", value: "Lykon/DreamShaper" },
-                { name: "Protogen", value: "darkstorm2150/Protogen_v2.2_Official_Release" }
+                ...CHOICES
             )
             .setRequired(true)
     )

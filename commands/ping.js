@@ -11,7 +11,7 @@ export const run = async (client, ctx) => {
     ctx.reply({
         embeds: [
             new EmbedBuilder()
-            .setDescription(`🏓 **Pong! The ping of the bot is \`${client.ws.ping}\`ms`)
+            .setDescription(`🏓 **Pong! The ping of the bot is \`${client.ws.ping}\`ms**`)
             .setColor("Blue")
         ]
     })
