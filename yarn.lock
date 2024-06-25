@@ -46,10 +46,17 @@
   resolved "https://registry.npmjs.org/@discordjs/util/-/util-0.2.0.tgz#91b590dae3934ffa5fe34530afc5212c569d6751"
   integrity sha512-/8qNbebFzLWKOOg+UV+RB8itp4SmU5jw0tBUD3ifElW6rYNOj1Ku5JaSW7lLl/WgjjxF01l/1uQPCzkwr110vg==
 
-"@huggingface/inference@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.npmjs.org/@huggingface/inference/-/inference-1.8.0.tgz#5b1b22c790451e8051adefe9b7f725a7135c38a8"
-  integrity sha512-Dkh7PiyMf6TINRocQsdceiR5LcqJiUHgWjaBMRpCUOCbs+GZA122VH9q+wodoSptj6rIQf7wIwtDsof+/gd0WA==
+"@huggingface/inference@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.npmjs.org/@huggingface/inference/-/inference-2.7.0.tgz#7a44a3c40683b9355933e98e639998da62c58117"
+  integrity sha512-u7Fn637Q3f7nUB1tajM4CgzhvoFQkOQr5W5Fm+2wT9ETgGoLBh25BLlYPTJRjAd2WY01s71v0lqAwNvHHCc3mg==
+  dependencies:
+    "@huggingface/tasks" "^0.10.0"
+
+"@huggingface/tasks@^0.10.0":
+  version "0.10.18"
+  resolved "https://registry.npmjs.org/@huggingface/tasks/-/tasks-0.10.18.tgz#f8f0291aa7a503833554ba1a44e6ea65057f6fcf"
+  integrity sha512-3dAp03pZ3AONAEX0J6hr7G5i1F0xuvi7C8ki+8o9nmw8fksNfN0rNuqEBiE2xLP2CG9roOtAUlkq4gIrJBbKSA==
 
 "@sapphire/async-queue@^1.5.0":
   version "1.5.0"

@@ -3,37 +3,46 @@ import { AttachmentBuilder, EmbedBuilder } from "discord.js";
 import chalk from "chalk";
 import joinImages from "join-images";
 
-let inference
+let inference;
 
 const HF_ACCESS_TOKEN = process.env.HUGGING_FACE_API_KEY;
 
-console.log(`${chalk.blue("[")} ${chalk.gray("INFO")} ${chalk.blue("]")} : Initialized Hugging Face Client`)
+console.log(
+  `${chalk.blue("[")} ${chalk.gray("INFO")} ${chalk.blue(
+    "]"
+  )} : Initialized Hugging Face Client`
+);
 
 inference = new HfInference(HF_ACCESS_TOKEN, {
   use_gpu: true,
-  use_cache: false
-})
+  use_cache: false,
+});
 
 export async function variationGenerator(prompt, negative_prompt, ctx) {
-  const images = []
+  const images = [];
 
   ctx.reply({
     embeds: [
       new EmbedBuilder()
-      .setDescription(`<a:loading_color:1089371793468432384> **Generating \`1/3\` images**`)
-      .setColor("Blue")
-    ]
-  })
+        .setDescription(
+          `<a:loading_color:1089371793468432384> **Generating \`1/3\` images**`
+        )
+        .setColor("Blue"),
+    ],
+  });
 
-  for(let i = 0; i < 3; i++) {
-    if(i !== 0) {
+  for (let i = 0; i < 3; i++) {
+    if (i !== 0) {
       ctx.editReply({
         embeds: [
           new EmbedBuilder()
-          .setDescription(`<a:loading_color:1089371793468432384> **Generating \`${i + 1}/3\` images**`)
-          .setColor("Blue")
-        ]
-      })
+            .setDescription(
+              `<a:loading_color:1089371793468432384> **Generating \`${i + 1
+              }/3\` images**`
+            )
+            .setColor("Blue"),
+        ],
+      });
     }
 
     const image = await inference.textToImage({
@@ -41,34 +50,36 @@ export async function variationGenerator(prompt, negative_prompt, ctx) {
       parameters: {
         negative_prompt: negative_prompt ?? "blurry",
         width: 800,
-        height: 1000
+        height: 1000,
       },
-      model: "dreamlike-art/dreamlike-anime-1.0"
-    })
+      model: "dreamlike-art/dreamlike-anime-1.0",
+    });
 
-    images.push(Buffer.from(await image.arrayBuffer()))
+    images.push(Buffer.from(await image.arrayBuffer()));
   }
-  
+
   ctx.editReply({
     embeds: [
       new EmbedBuilder()
-      .setDescription(`<:tick:1089371868420653066> **Generated your prompt!**`)
-      .setColor("Blue")
-    ]
-  })
+        .setDescription(
+          `<:tick:1089371868420653066> **Generated your prompt!**`
+        )
+        .setColor("Blue"),
+    ],
+  });
 
   const sharp = await joinImages.joinImages(images, {
-    direction: "horizontal"
-  })
+    direction: "horizontal",
+  });
 
-  const buffer = await sharp.toFormat("png").toBuffer()
+  const buffer = await sharp.toFormat("png").toBuffer();
 
-  const attachment = new AttachmentBuilder(buffer, {name:"image.png"})
+  const attachment = new AttachmentBuilder(buffer, { name: "image.png" });
 
   ctx.followUp({
     content: ctx.user.toString(),
-    files: [attachment]
-  })
+    files: [attachment],
+  });
 }
 
 export async function generatePrompt(prompt, model, negative_prompt, name) {
@@ -77,21 +88,48 @@ export async function generatePrompt(prompt, model, negative_prompt, name) {
     parameters: {
       negative_prompt: negative_prompt ?? "blurry",
     },
-    model: model
-  })
+    model: model,
+  });
 
   const attachment = new AttachmentBuilder(
     Buffer.from(await image.arrayBuffer()),
     { name: name ?? "image.png" }
   );
 
-  return attachment
+  return attachment;
 }
 
+export async function generateImageBeta(prompt, negative_prompt) {
+  const images = new Array(3).fill(inference.textToImage({
+    inputs: prompt,
+    parameters: {
+      negative_prompt: negative_prompt ?? "blurry",
+      width: 800,
+      height: 1000,
+    },
+    model: "dreamlike-art/dreamlike-anime-1.0",
+  }))
+
+  const promises = (await Promise.all(images)).map(async (image) => {
+    return Buffer.from(await image.arrayBuffer())
+  })
+
+  const image = joinImages.joinImages(await Promise.all(promises))
+
+  return new AttachmentBuilder(image.toFormat("png").toBuffer(), { name: "image.png" })
+}
+
+  
+
+
 setInterval(() => {
-  console.log(`${chalk.blue("[")} ${chalk.gray("INFO")} ${chalk.blue("]")} : Resetting Hugging Face Client`)
+  console.log(
+    `${chalk.blue("[")} ${chalk.gray("INFO")} ${chalk.blue(
+      "]"
+    )} : Resetting Hugging Face Client`
+  );
   inference = new HfInference(HF_ACCESS_TOKEN, {
     use_gpu: true,
-    use_cache: false
+    use_cache: false,
   });
-}, 1 * 60 * 60 * 1000)
+}, 1 * 60 * 60 * 1000);

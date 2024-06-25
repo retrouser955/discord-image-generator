@@ -11,28 +11,28 @@ class DallE2AI {
 
     constructor(token) {
         this.client.on('ready', () => {
-            this.client.user.setActivity("AI Image Generations", {
-                type: ActivityType.Watching
-            })
+            const left = chalk.blue("[")
+            const right = chalk.blue(']')
+
+            console.log(`${left} ${chalk.gray("Info")} ${right} : Logged into Discord as ${chalk.bold(this.client.user.tag)}`)
         })
 
         this.token = token || process.env.TOKEN
     }
 
     async startBot() {
-        const left = chalk.blue("[")
-        const right = chalk.blue(']')
-
         await this.client.login(this.token)
 
-        console.log(`${left} ${chalk.gray("Info")} ${right} : Logged into Discord as ${chalk.bold(this.client.user.tag)}`)
+        this.client.user.setActivity("AI Image Generations", {
+            type: ActivityType.Watching
+        })
 
         return this.client
     }
 
     async registerCommands() {
-        const rest = new REST({ version: "10" }).setToken(this.client.token)
-        const apiRoute = Routes.applicationCommands(this.client.user.id)
+        const rest = new REST({ version: "10" }).setToken(this.token)
+        const apiRoute = Routes.applicationCommands(process.env.ID)
 
         const commands = this.commands.map(cmd => cmd.data.toJSON())
 

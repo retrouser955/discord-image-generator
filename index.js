@@ -5,6 +5,7 @@ dotenv.config()
 
 const ai = new DallE2AI(process.env.TOKEN)
 
-await ai.startBot()
 await ai.getCommands('./commands')
 await ai.registerCommands()
+
+await ai.startBot()
