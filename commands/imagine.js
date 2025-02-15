@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder, ApplicationIntegrationType } from "discord.js";
 import { generatePrompt } from "../helpers/generate.js";
 import CHOICES from "../helpers/choices.js";
 
@@ -22,6 +22,8 @@ export const data = new SlashCommandBuilder()
     .setDescription("The AI model you wish to use")
     .addChoices(...CHOICES)
   )
+  .setIntegrationTypes(ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall)
+  .setContexts(0, 1, 2)
 
 export const run = async (client, ctx) => {
   ctx.reply({

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder, ApplicationIntegrationType } from "discord.js";
 import { variationGenerator } from "../helpers/generate.js";
 
 export const name = "variation"
@@ -16,6 +16,8 @@ export const data = new SlashCommandBuilder()
     option.setName('avoid')
     .setDescription("Things you want to avoid in this generation")
 )
+.setIntegrationTypes(ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall)
+.setContexts(0, 1, 2)
 
 export const run = (client, ctx) => {
     const prompt = ctx.options.getString("prompt")

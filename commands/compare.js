@@ -4,6 +4,7 @@ import {
     ButtonBuilder,
     ButtonStyle,
     EmbedBuilder,
+    ApplicationIntegrationType
 } from "discord.js";
 import { generatePrompt } from "../helpers/generate.js";
 import CHOICES from "../helpers/choices.js";
@@ -52,7 +53,9 @@ export const data = new SlashCommandBuilder()
         option
             .setName("avoid")
             .setDescription("Things you want to avoid in this generation")
-    );
+    )
+    .setIntegrationTypes(ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall)
+    .setContexts(0, 1, 2);
 
 export const run = async (client, ctx) => {
     const model1 = ctx.options.getString('model_1')
